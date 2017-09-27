@@ -1,0 +1,16 @@
+{
+  "name": "supinternet-vue-mean",
+  "version": "0.0.1",
+  "description": "Un projet simple avec Vue.js et les étudiants de SupInternet",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "materialize-css": "^0.100.2",
+    "vue": "^2.4.4"
+  }
+}
