@@ -81,7 +81,7 @@
             try {
                 // Tente de récupérer des tasks 
                 let tasks  = localStorage.getItem('tasks');
-                tasks      = JSON.parse(tasks);
+                tasks      = JSON.parse(tasks) || [];
                 this.tasks = tasks;
             } catch (e) {
                 console.warn('Problème lors de la récupération des tâches dans le localStorage ! Aucune tâche n\'a été chargée.\n', e);
