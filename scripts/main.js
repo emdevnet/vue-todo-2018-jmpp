@@ -36,7 +36,17 @@
                     vider la valeur de ce champs input
                 */
                 this.newTaskTitle = '';
-            }
+            },
+            
+            removeTask : function(task) {
+                // L'objet 'task' passé en paramètre correspond réellement à l'objet de notre modèle, on peut donc utiliser .indexOf() pour le rechercher
+                var index = this.tasks.indexOf(task);
+                
+                // Si cet objet a été trouvé, on le retire du tableau de tâches
+                if (index > -1) {
+                    this.tasks.splice(index, 1);
+                }
+            },
         },
 
         /* Méthodes dites "computed" (pré-calculées) :
