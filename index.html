@@ -27,7 +27,7 @@
                 <label for="taskTitle">Intitulé de la tâche</label>
             </div>
             <div class="col m4 offset-m5">
-                <button type="submit" class="waves-effect waves-light btn">Ajouter</button>
+                <button type="submit" class="waves-effect waves-light btn" v-bind:disabled="newTaskTitle.trim() === ''">Ajouter</button>
             </div>
         </form>
     </fieldset>
