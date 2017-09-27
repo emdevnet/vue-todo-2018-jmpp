@@ -22,7 +22,7 @@
                 // Si l'intitulé de la nouvelle tâche est vide, on ne fait rien et on arrête la fonction.
                 if (this.newTaskTitle.trim() === '') return;
     
-                var newTask = {
+                let newTask = {
                     title : this.newTaskTitle,
                     isDone: false
                 };
@@ -40,7 +40,7 @@
             
             removeTask : function(task) {
                 // L'objet 'task' passé en paramètre correspond réellement à l'objet de notre modèle, on peut donc utiliser .indexOf() pour le rechercher
-                var index = this.tasks.indexOf(task);
+                let index = this.tasks.indexOf(task);
                 
                 // Si cet objet a été trouvé, on le retire du tableau de tâches
                 if (index > -1) {
@@ -56,8 +56,8 @@
             remaining : function() {
                 /*
                     // Méthode "classique"
-                    var counter = 0;
-                    for (var index = 0; index < this.tasks.length; index++)
+                    let counter = 0;
+                    for (let index = 0; index < this.tasks.length; index++)
                     {
                         if (this.tasks[index].isDone === false)
                         {
@@ -77,8 +77,7 @@
         // Filters de l'application Vue.js
         filters : {
             pluralize : function(nb, word) {
-                if (nb > 1) { word += "s"; }
-                return nb + " " + word;
+                return nb + " " + word + ((nb > 1) ? "s" : "");
             }
         }
     });
