@@ -12,6 +12,29 @@
                 { title : "Acheter un chiot", isDone : false },
                 { title : "Revendre le chat", isDone : false }
             ]
+        },
+
+        // Méthodes pré-caculées de l'application Vue.js
+        computed : {
+            remaining : function() {
+                /*
+                    // Méthode "classique"
+                    var counter = 0;
+                    for (var index = 0; index < this.tasks.length; index++)
+                    {
+                        if (this.tasks[index].isDone === false)
+                        {
+                            counter++;
+                        }
+                    }
+                    return counter;
+                */
+                    
+                // Méthode fonctionnelle
+                return this.tasks
+                            .filter( task => !task.isDone )
+                            .length;
+            }
         }
     });
 }
