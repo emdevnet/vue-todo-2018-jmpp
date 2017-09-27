@@ -7,12 +7,7 @@
 
         // Modèle de données de l'application
         data : {
-            tasks : [
-                { title : "Nourrir le chat" , isDone : true },
-                { title : "Acheter un chiot", isDone : false },
-                { title : "Revendre le chat", isDone : false }
-            ],
-
+            tasks        : [],
             newTaskTitle : ''
         },
 
@@ -78,6 +73,27 @@
         filters : {
             pluralize : function(nb, word) {
                 return nb + " " + word + ((nb > 1) ? "s" : "");
+            }
+        },
+
+        // Méthode de Vue.js invoquée lorsque le composant a été instancié (c'est ici que l'on peut placer le code d'initialisation de l'app)
+        created : function() {
+            try {
+                // Tente de récupérer des tasks 
+                let tasks  = localStorage.getItem('tasks');
+                tasks      = JSON.parse(tasks);
+                this.tasks = tasks;
+            } catch (e) {
+                console.warn('Problème lors de la récupération des tâches dans le localStorage ! Aucune tâche n\'a été chargée.\n', e);
+            }
+        },
+
+        watch : {
+            tasks : {
+                deep : true,
+                handler : function() {
+                    localStorage.setItem('tasks', JSON.stringify(this.tasks));
+                }
             }
         }
     });
