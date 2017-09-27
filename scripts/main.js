@@ -8,7 +8,7 @@
         // Modèle de données de l'application
         data : {
             tasks : [
-                { title : "Nourrir le chat", isDone : true },
+                { title : "Nourrir le chat" , isDone : true },
                 { title : "Acheter un chiot", isDone : false },
                 { title : "Revendre le chat", isDone : false }
             ]
