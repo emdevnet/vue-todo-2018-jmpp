@@ -34,9 +34,10 @@
 
     <h3>Liste des tâches</h3>
 
-    <p>Il reste <strong>{{ remaining | pluralize('tâche') }}</strong> sur <strong>{{ tasks.length }}</strong> à effectuer.</p>
+    <p v-if="remaining > 0">Il reste <strong>{{ remaining | pluralize('tâche') }}</strong> sur <strong>{{ tasks.length }}</strong> à effectuer.</p>
+    <p v-else>✔ Toutes les tâches sont faites.</p>
 
-    <ul class="collection">
+    <ul class="collection" v-if="tasks.length > 0">
         
         <li class="collection-item" v-for="(task, index) in tasks">
             <input type="checkbox" :id="'t_' + (index + 1)" v-model="task.isDone">
