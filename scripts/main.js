@@ -11,10 +11,37 @@
                 { title : "Nourrir le chat" , isDone : true },
                 { title : "Acheter un chiot", isDone : false },
                 { title : "Revendre le chat", isDone : false }
-            ]
+            ],
+
+            newTaskTitle : ''
         },
 
-        // Méthodes pré-caculées de l'application Vue.js
+        // Méthodes (fonctions) de l'application Vue.js
+        methods : {
+            addTask : function() {
+                // Si l'intitulé de la nouvelle tâche est vide, on ne fait rien et on arrête la fonction.
+                if (this.newTaskTitle.trim() === '') return;
+    
+                var newTask = {
+                    title : this.newTaskTitle,
+                    isDone: false
+                };
+                
+                this.tasks.push( newTask );
+    
+                /*
+                    Réinitalise la valeur de la variable "newTaskName", utilisée
+                    en tant que modèle sur le <input type="text">
+                    Du coup, réinitialiser la variable "newTaskName" permet de
+                    vider la valeur de ce champs input
+                */
+                this.newTaskTitle = '';
+            }
+        },
+
+        /* Méthodes dites "computed" (pré-calculées) :
+            Améliore les performances en n'évoquant les méthodes
+            QUE si l'une des propriété en interne ne change */
         computed : {
             remaining : function() {
                 /*
