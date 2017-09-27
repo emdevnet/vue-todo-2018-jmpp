@@ -35,6 +35,14 @@
                             .filter( task => !task.isDone )
                             .length;
             }
+        },
+
+        // Filters de l'application Vue.js
+        filters : {
+            pluralize : function(nb, word) {
+                if (nb > 1) { word += "s"; }
+                return nb + " " + word;
+            }
         }
     });
 }
