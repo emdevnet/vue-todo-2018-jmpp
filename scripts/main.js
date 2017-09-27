@@ -84,14 +84,16 @@
                 tasks      = JSON.parse(tasks) || [];
                 this.tasks = tasks;
             } catch (e) {
+                // Si l'opération provoque une erreur, on affiche un Warning en console et on ne fait rien de spécial (laisse un tableau vide dans `this.tasks` donc)
                 console.warn('Problème lors de la récupération des tâches dans le localStorage ! Aucune tâche n\'a été chargée.\n', e);
             }
         },
 
+        // Indique à Vue.js quelles sont les propriétés (dans 'data') de l'application sur lesquelles on souhaite observer les changements
         watch : {
             tasks : {
-                deep : true,
-                handler : function() {
+                deep : true, // Indique que l'observation de changements sur cette propriété doit se faire en profondeur
+                handler : function() { // Invoque cette fonction à chaque changement de la data 'tasks'
                     localStorage.setItem('tasks', JSON.stringify(this.tasks));
                 }
             }
