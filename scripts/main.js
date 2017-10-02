@@ -1,6 +1,7 @@
 {
     'use strict';
 
+    // Composant <task>
     const Task = {
         props : {
             task : { type : Object, required : true },
@@ -23,32 +24,30 @@
             }
         }
     };
+    // Fin du composant <task>
 
-    new Vue({
-        // L'élément définissant le périmètre d'action de l'application Vue.js
-        el : 'main#app',
-
-        components: { Task },
-
-        // Modèle de données de l'application
-        data : {
-            tasks        : [],
-            newTaskTitle : ''
+    // Composant <task-form>
+    const TaskForm = {
+        template : `
+            <form class="row" v-on:click.prevent="onSubmit">
+                <div class="input-field col m6 offset-m3">
+                    <input id="taskTitle" type="text" v-model="newTaskTitle">
+                    <label for="taskTitle">Intitulé de la tâche</label>
+                </div>
+                <div class="col m4 offset-m5">
+                    <button type="submit" class="waves-effect waves-light btn" v-bind:disabled="newTaskTitle.trim() === ''">Ajouter</button>
+                </div>
+            </form>
+        `,
+        data : function() {
+            return {
+                newTaskTitle : ''
+            }
         },
-
-        // Méthodes (fonctions) de l'application Vue.js
         methods : {
-            addTask : function() {
-                // Si l'intitulé de la nouvelle tâche est vide, on ne fait rien et on arrête la fonction.
-                if (this.newTaskTitle.trim() === '') return;
-    
-                let newTask = {
-                    title : this.newTaskTitle,
-                    isDone: false
-                };
-                
-                this.tasks.push( newTask );
-    
+            onSubmit : function() {
+                this.$emit('add', this.newTaskTitle);
+
                 /*
                     Réinitalise la valeur de la variable "newTaskName", utilisée
                     en tant que modèle sur le <input type="text">
@@ -56,6 +55,35 @@
                     vider la valeur de ce champs input
                 */
                 this.newTaskTitle = '';
+            }
+        }
+    };
+    // Fin du composant <task-form>
+
+    new Vue({
+        // L'élément définissant le périmètre d'action de l'application Vue.js
+        el : 'main#app',
+
+        // Composants utilisés pour l'application Vue
+        components: { Task, TaskForm },
+
+        // Modèle de données de l'application
+        data : {
+            tasks : []
+        },
+
+        // Méthodes (fonctions) de l'application Vue.js
+        methods : {
+            addTask : function(newTaskTitle) {
+                // Si l'intitulé de la nouvelle tâche est vide, on ne fait rien et on arrête la fonction.
+                if (newTaskTitle.trim() === '') return;
+    
+                let newTask = {
+                    title : newTaskTitle,
+                    isDone: false
+                };
+                
+                this.tasks.push( newTask );
             },
             
             removeTask : function(task) {
