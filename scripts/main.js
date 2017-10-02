@@ -1,9 +1,34 @@
 {
     'use strict';
 
+    const Task = {
+        props : {
+            task : { type : Object, required : true },
+            index : { type : Number, required : true }
+        },
+
+        template : `
+            <li class="collection-item">
+                <input type="checkbox" :id="'t_' + (index + 1)" v-model="task.isDone">
+                <label :for="'t_' + (index + 1)">{{ task.title }}</label>
+                <a href="#" class="link-delete" title="Supprimer cette tâche" v-on:click.prevent="remove(task)"><!-- Passage de l'objet 'task' en paramètre à la méthode 'removeTask' -->
+                    <i class="small material-icons">delete_forever</i>
+                </a>
+            </li>
+        `,
+
+        methods : {
+            remove : function(task) {
+                this.$emit('remove', task);
+            }
+        }
+    };
+
     new Vue({
         // L'élément définissant le périmètre d'action de l'application Vue.js
         el : 'main#app',
+
+        components: { Task },
 
         // Modèle de données de l'application
         data : {
